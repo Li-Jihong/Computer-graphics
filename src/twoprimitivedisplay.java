@@ -23,8 +23,7 @@ public class twoprimitivedisplay extends Applet {
 //设置SimpleUniverse，由系统选择视点在z轴的正向，观察方向沿z轴反向
         BranchGroup BranchGroupScene = createBranchGroup();
         SimpleUniverse u = new SimpleUniverse(c);
-        u.getViewingPlatform().setNominalViewingTransform();
-//将BranchGroup：BranchGroupScene加入到SimpleUniverse：u中
+        u.getViewingPlatform().setNominalViewingTransform();//将BranchGroup：BranchGroupScene加入到SimpleUniverse：u中
         u.addBranchGraph(BranchGroupScene);
     }
 
