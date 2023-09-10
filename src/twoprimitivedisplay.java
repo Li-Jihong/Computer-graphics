@@ -15,8 +15,7 @@ import java.awt.*;
 
 public class twoprimitivedisplay extends Applet {
     public twoprimitivedisplay() {//设置显示界面的相关参数
-        setLayout(new BorderLayout());
-//创建投影平面Canvas3D
+        setLayout(new BorderLayout());//创建投影平面Canvas3D
         GraphicsConfiguration gc = SimpleUniverse.getPreferredConfiguration();
         Canvas3D c = new Canvas3D(gc);
 //将投影平面上的图象显示在显示平面的中间
