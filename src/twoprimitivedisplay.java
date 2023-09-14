@@ -13,7 +13,7 @@ import javax.vecmath.Vector3f;
 import java.applet.Applet;
 import java.awt.*;
 
-public class twoprimitivedisplay extends Applet {   //第一次实验
+public class twoprimitivedisplay extends Applet {   //第一次计算机图形学实验 2023-09-14晚上9-10节课
     public twoprimitivedisplay() {//设置显示界面的相关参数
         setLayout(new BorderLayout());//创建投影平面Canvas3D
         GraphicsConfiguration gc = SimpleUniverse.getPreferredConfiguration();
