@@ -3,7 +3,7 @@
  * \* @ProjectName: 例3.1 基本体组合的显示实例
  * \* @FileName: twoprimitivedisplay
  * \* @author: li-jihong
- * \* Date: 2023-09-14 14:00
+ * \* Date: 2023-09-14 14:01
  */
 
 import com.sun.j3d.utils.applet.MainFrame;
