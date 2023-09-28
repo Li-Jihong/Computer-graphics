@@ -32,7 +32,7 @@ public class DisplayLineStrip extends Applet {
     }
 
     public static void main(String[] args) {
-        new MainFrame(new DisplayLineStrip(), 300, 300);
+        new MainFrame(new DisplayLineStrip(), 450, 450);
     }
 
     public BranchGroup createBranchGroupSceneGraph() {
@@ -78,11 +78,25 @@ public class DisplayLineStrip extends Applet {
                 0.0f, 0.f, 1.f, 1.0f, 1.0f, 0.f,
                 0.0f, 1.0f, 1.f, 1.f, 0.f, 1.0f,
                 0.0f, .0f, 0.f, 0.3f, 0.8f, 0.0f,};
-        int[] substrips = new int[2];
-        substrips[0] = 4;
-        substrips[1] = 4;
-        //int[] substrips=new int[1];
-        // substrips[0]=8;
+
+        //方案一: 分为两组，4个顶点、4个顶点
+//        int[] substrips = new int[2];
+//        substrips[0] = 4;
+//        substrips[1] = 4;
+
+        //方案二: 分为两组，2个顶点、6个顶点
+//        int[] substrips = new int[2];
+//        substrips[0] = 2;
+//        substrips[1] = 6;
+
+        //方案三: 分为两组，6个顶点、2个顶点
+//        int[] substrips = new int[2];
+//        substrips[0] = 6;
+//        substrips[1] = 2;
+
+        //方案四: 整个是一个组
+        int[] substrips=new int[1];
+        substrips[0]=8;
         LineStripArray Striplines = new LineStripArray
                 (8, LineArray.COORDINATES | LineArray.COLOR_3, substrips);
         Striplines.setCoordinates(0, vertexes);

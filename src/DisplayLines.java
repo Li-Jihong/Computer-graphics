@@ -3,7 +3,7 @@
  * \* @ProjectName: 例3.4 线显示的程序
  * \* @FileName: DisplayLines
  * \* @author: li-jihong
- * \* Date: 2023-09-21 14:06
+ * \* Date: 2023-09-28 10:41
  */
 
 import com.sun.j3d.utils.applet.MainFrame;
@@ -32,7 +32,7 @@ public class DisplayLines extends Applet {
     }
 
     public static void main(String[] args) {
-        new MainFrame(new DisplayLines(), 300, 300);
+        new MainFrame(new DisplayLines(), 450, 450);
     }
 
     public BranchGroup createBranchGroupSceneGraph() {
@@ -85,7 +85,7 @@ public class DisplayLines extends Applet {
         //定义线属性
         LineAttributes lineattributes = new LineAttributes();
         lineattributes.setLineWidth(20.f);
-        lineattributes.setLineAntialiasingEnable(true);
+        lineattributes.setLineAntialiasingEnable(false);
         lineattributes.setLinePattern(LineAttributes.PATTERN_SOLID);
         //PATTERN_SOLID PATTERN_DASH PATTERN_DOT PATTERN_DASH_DOT
         Appearance app = new Appearance();

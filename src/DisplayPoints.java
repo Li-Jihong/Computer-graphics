@@ -31,7 +31,7 @@ public class DisplayPoints extends Applet {
     }
 
     public static void main(String[] args) {
-        new MainFrame(new DisplayPoints(), 300, 300);
+        new MainFrame(new DisplayPoints(), 450, 450);
     }
 
     public BranchGroup createBranchGroup() {
@@ -77,7 +77,7 @@ public class DisplayPoints extends Applet {
         //定义点的大小
         pointsattributes.setPointSize(70.0f);
         //如有下面这项，空间点显示为圆球形；如无，空间点显示为正方形
-        pointsattributes.setPointAntialiasingEnable(true);
+        pointsattributes.setPointAntialiasingEnable(false);
         app.setPointAttributes(pointsattributes);
         shapepoints.setGeometry(points);
         shapepoints.setAppearance(app);
