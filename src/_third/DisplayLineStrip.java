@@ -3,7 +3,7 @@ package _third; /**
  * \* @ProjectName: 例3.6 LineStripArray类程序实例
  * \* @FileName: _third.DisplayLineStrip
  * \* @author: li-jihong
- * \* Date: 2023-09-28 11:39:
+ * \* Date: 2023-09-28 11:39
  */
 
 import com.sun.j3d.utils.applet.MainFrame;
