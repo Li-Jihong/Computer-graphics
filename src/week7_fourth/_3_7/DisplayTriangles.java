@@ -1,9 +1,9 @@
-/**
+package week7_fourth._3_7; /**
  * \* Created with IntelliJ IDEA.
- * \* @ProjectName: 例3.5 IndexedLineArray线显示程序
- * \* @FileName: DisplayIndexedLines
+ * \* @ProjectName: 例3.7 TriangleArray类程序实例
+ * \* @FileName: week7_fourth._3_7.DisplayTriangles
  * \* @author: li-jihong
- * \* Date: 2023-09-21 14:11
+ * \* Date: 2023-09-21 14:14
  */
 
 import com.sun.j3d.utils.applet.MainFrame;
@@ -15,11 +15,12 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import javax.media.j3d.*;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3f;
 import java.applet.Applet;
 import java.awt.*;
 
-public class DisplayIndexedLines extends Applet {
-    public DisplayIndexedLines() {
+public class DisplayTriangles extends Applet {
+    public DisplayTriangles() {
         setLayout(new BorderLayout());
         GraphicsConfiguration gc = SimpleUniverse.getPreferredConfiguration();
         Canvas3D c = new Canvas3D(gc);
@@ -31,7 +32,7 @@ public class DisplayIndexedLines extends Applet {
     }
 
     public static void main(String[] args) {
-        new MainFrame(new DisplayIndexedLines(), 300, 300);
+        new MainFrame(new DisplayTriangles(), 450, 450);
     }
 
     public BranchGroup createBranchGroup() {
@@ -41,6 +42,11 @@ public class DisplayIndexedLines extends Applet {
         Background bg = new Background(bgColor);
         bg.setApplicationBounds(bounds);
         BranchGroupRoot.addChild(bg);
+        Color3f directionalColor = new Color3f(1.f, 0.f, 0.f);
+        Vector3f vec = new Vector3f(0.f, 0.f, -1.0f);
+        DirectionalLight directionalLight = new DirectionalLight(directionalColor, vec);
+        directionalLight.setInfluencingBounds(bounds);
+        BranchGroupRoot.addChild(directionalLight);
         TransformGroup transformgroup = new TransformGroup();
         transformgroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         transformgroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
@@ -57,35 +63,38 @@ public class DisplayIndexedLines extends Applet {
         mousetranslate.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mousetranslate);
         mousetranslate.setSchedulingBounds(bounds);
-        Shape3D shapelines = new Shape3D();
-        //定义顶点坐标
-        float vertexes[] = {.5f, 0.5f, 0.0f, -0.5f, 0.5f, 0.0f,
-                0.5f, 0.3f, 0.0f, -0.5f, 0.3f, 0.0f,
-                -0.5f, -0.1f, 0.0f, 0.5f, -0.1f, 0.1f};
-        //定义点颜色
-        float pointcolors[] = {1.0f, 0.f, 0.0f, 0.0f, 1.f, 0.0f,
-                0.0f, 0.f, 1.0f, 1.0f, 1.0f, 0.f,
-                0.0f, 1.0f, 1.f, 1.f, 0.f, 1.0f};
-        int vCount = 6;
-        int indexCount = 4;
-        int index[] = {0, 1, 3, 5};
-        IndexedLineArray lines = new IndexedLineArray
-                (vCount, LineArray.COORDINATES | LineArray.COLOR_3, indexCount);
-        lines.setCoordinates(0, vertexes);
-        lines.setCoordinateIndices(0, index);
-        lines.setColors(0, pointcolors);
-        lines.setColorIndices(0, index);
-        Appearance app = new Appearance();
-        //定义线的属性
-        LineAttributes linesattributes = new LineAttributes();
-        //定义线的宽度
-        linesattributes.setLineWidth(30.0f);
-        linesattributes.setLineAntialiasingEnable(true);
-        app.setLineAttributes(linesattributes);
-        shapelines.setGeometry(lines);
-        shapelines.setAppearance(app);
-        transformgroup.addChild(shapelines);
+        transformgroup.addChild(new TriangleArrays());
         BranchGroupRoot.compile();
         return BranchGroupRoot;
+    }
+}
+
+class TriangleArrays extends Shape3D {
+    public TriangleArrays() {
+        int vCount = 12;
+        float vertexes[] = {-0.6f, 0.9f, 0.0f, -0.6f, -0.9f, 0.2f,
+                -0.4f, 0.9f, -0.2f, -0.2f, -0.9f, 0.2f,
+                0.0f, 0.9f, -0.2f, 0.0f, -0.9f, 0.2f,
+                0.2f, 0.7f, 0.0f, 0.2f, -0.9f, 0.3f,
+                0.5f, 0.8f, -0.3f, 0.6f, -.9f, 0.0f,
+                0.8f, 0.9f, 0.2f, 0.8f, -0.8f, 0.3f};
+        float colors[] = {0.0f, 0.5f, 1.0f, 0.0f, 0.5f, 1.0f,
+                0.0f, 0.8f, .0f, 1.0f, 0.0f, 0.3f,
+                0.0f, 1.0f, 0.5f, 0.9f, 1.0f, 0.0f,
+                0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f,
+                1.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.5f,
+                1.0f, 0.8f, 0.0f, 1.0f, 0.5f, 0.0f};
+        TriangleArray trianglearray = new TriangleArray
+                (vCount, TriangleArray.COORDINATES | TriangleArray.COLOR_3);
+        trianglearray.setCoordinates(0, vertexes);
+        trianglearray.setColors(0, colors);
+        PolygonAttributes polygonattributes = new PolygonAttributes();
+//        polygonattributes.setCullFace(PolygonAttributes.CULL_NONE);
+//        polygonattributes.setCullFace(PolygonAttributes.CULL_FRONT);
+        polygonattributes.setCullFace(PolygonAttributes.CULL_BACK);
+        Appearance app = new Appearance();
+        app.setPolygonAttributes(polygonattributes);
+        this.setGeometry(trianglearray);
+        this.setAppearance(app);
     }
 }

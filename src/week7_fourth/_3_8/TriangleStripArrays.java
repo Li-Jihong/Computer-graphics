@@ -1,9 +1,10 @@
+package week7_fourth._3_8;
 /**
  * \* Created with IntelliJ IDEA.
- * \* @ProjectName: 例3.7 TriangleArray类程序实例
- * \* @FileName: DisplayTriangles
+ * \* @ProjectName: 例3.8 TriangleStripArray类程序实例
+ * \* @FileName: week7_fourth._3_8.TriangleStripArrays
  * \* @author: li-jihong
- * \* Date: 2023-09-21 14:14
+ * \* Date: 2023-09-21 14:15
  */
 
 import com.sun.j3d.utils.applet.MainFrame;
@@ -19,8 +20,8 @@ import javax.vecmath.Vector3f;
 import java.applet.Applet;
 import java.awt.*;
 
-public class DisplayTriangles extends Applet {
-    public DisplayTriangles() {
+public class TriangleStripArrays extends Applet {
+    public TriangleStripArrays() {
         setLayout(new BorderLayout());
         GraphicsConfiguration gc = SimpleUniverse.getPreferredConfiguration();
         Canvas3D c = new Canvas3D(gc);
@@ -32,7 +33,7 @@ public class DisplayTriangles extends Applet {
     }
 
     public static void main(String[] args) {
-        new MainFrame(new DisplayTriangles(), 300, 300);
+        new MainFrame(new TriangleStripArrays(), 450, 450);
     }
 
     public BranchGroup createBranchGroup() {
@@ -63,38 +64,41 @@ public class DisplayTriangles extends Applet {
         mousetranslate.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mousetranslate);
         mousetranslate.setSchedulingBounds(bounds);
-        transformgroup.addChild(new TriangleArrays());
+        transformgroup.addChild(new TriangleStrip());
         BranchGroupRoot.compile();
         return BranchGroupRoot;
     }
 }
 
-class TriangleArrays extends Shape3D {
-    public TriangleArrays() {
-        int vCount = 12;
-        float vertexes[] = {-0.6f, 0.9f, 0.0f, -0.6f, -0.9f, 0.2f,
-                -0.4f, 0.9f, -0.2f, -0.2f, -0.9f, 0.2f,
-                0.0f, 0.9f, -0.2f, 0.0f, -0.9f, 0.2f,
-                0.2f, 0.7f, 0.0f, 0.2f, -0.9f, 0.3f,
-                0.5f, 0.8f, -0.3f, 0.6f, -.9f, 0.0f,
-                0.8f, 0.9f, 0.2f, 0.8f, -0.8f, 0.3f};
+class TriangleStrip extends Shape3D {
+    public TriangleStrip() {
+        int vertexesCount = 12;
+        int stripCount[] = new int[1];
+        float vertexes[] = {-0.9f, 0.9f, 0.0f, -0.8f, -0.9f, 0.2f,
+                -0.6f, 0.8f, -0.2f, -0.4f, -0.8f, 0.2f,
+                -0.3f, 0.9f, -0.2f, -0.2f, -0.9f, 0.2f,
+                0.4f, 0.7f, 0.0f, 0.4f, -0.7f, 0.3f,
+                0.6f, 0.9f, -0.3f, 0.6f, -.9f, 0.0f,
+                0.9f, 0.8f, 0.2f, 0.8f, -0.8f, 0.3f};
         float colors[] = {0.0f, 0.5f, 1.0f, 0.0f, 0.5f, 1.0f,
                 0.0f, 0.8f, .0f, 1.0f, 0.0f, 0.3f,
                 0.0f, 1.0f, 0.5f, 0.9f, 1.0f, 0.0f,
                 0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f,
                 1.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.5f,
                 1.0f, 0.8f, 0.0f, 1.0f, 0.5f, 0.0f};
-        TriangleArray trianglearray = new TriangleArray
-                (vCount, TriangleArray.COORDINATES | TriangleArray.COLOR_3);
-        trianglearray.setCoordinates(0, vertexes);
-        trianglearray.setColors(0, colors);
+        //生成三个子Strip，每个含有四个顶点
+        stripCount[0] = 12;
+//        stripCount[1] = 6;
+//        stripCount[2] = 3;
+        TriangleStripArray triangleStriparray = new TriangleStripArray(vertexesCount,
+                TriangleStripArray.COORDINATES | TriangleStripArray.COLOR_3, stripCount);
+        triangleStriparray.setCoordinates(0, vertexes);
+        triangleStriparray.setColors(0, colors);
         PolygonAttributes polygonattributes = new PolygonAttributes();
         polygonattributes.setCullFace(PolygonAttributes.CULL_NONE);
-        //polygonattributes.setCullFace(PolygonAttributes.CULL_FRONT);
-        //polygonattributes.setCullFace(PolygonAttributes.CULL_BACK);
         Appearance app = new Appearance();
         app.setPolygonAttributes(polygonattributes);
-        this.setGeometry(trianglearray);
+        this.setGeometry(triangleStriparray);
         this.setAppearance(app);
     }
 }

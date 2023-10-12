@@ -1,10 +1,4 @@
-/**
- * \* Created with IntelliJ IDEA.
- * \* @ProjectName: 例3.8 TriangleStripArray类程序实例
- * \* @FileName: TriangleStripArrays
- * \* @author: li-jihong
- * \* Date: 2023-09-21 14:15
- */
+package week7_fourth._3_9;
 
 import com.sun.j3d.utils.applet.MainFrame;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
@@ -13,14 +7,20 @@ import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 import javax.media.j3d.*;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
-import javax.vecmath.Vector3f;
+import javax.vecmath.*;
 import java.applet.Applet;
 import java.awt.*;
 
-public class TriangleStripArrays extends Applet {
-    public TriangleStripArrays() {
+/**
+ * \* Created with IntelliJ IDEA.
+ * \* @ProjectName: 例3.9 TriangleFanArray类程序实例
+ * \* @FileName: week7_fourth._3_9.TriangleFanArray
+ * \* @author: li-jihong
+ * \* Date: 2023-10-12 20:11
+ */
+
+public class TriangleFanArray2 extends Applet {
+    public TriangleFanArray2() {
         setLayout(new BorderLayout());
         GraphicsConfiguration gc = SimpleUniverse.getPreferredConfiguration();
         Canvas3D c = new Canvas3D(gc);
@@ -32,7 +32,7 @@ public class TriangleStripArrays extends Applet {
     }
 
     public static void main(String[] args) {
-        new MainFrame(new TriangleStripArrays(), 300, 300);
+        new MainFrame(new TriangleFanArray2(), 450, 450);
     }
 
     public BranchGroup createBranchGroup() {
@@ -63,41 +63,45 @@ public class TriangleStripArrays extends Applet {
         mousetranslate.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mousetranslate);
         mousetranslate.setSchedulingBounds(bounds);
-        transformgroup.addChild(new TriangleStrip());
+        transformgroup.addChild(new ShapeTriangleFanArray());
         BranchGroupRoot.compile();
         return BranchGroupRoot;
     }
 }
 
-class TriangleStrip extends Shape3D {
-    public TriangleStrip() {
+class ShapeTriangleFanArray extends Shape3D {
+    public ShapeTriangleFanArray() {
         int vertexesCount = 12;
-        int stripCount[] = new int[3];
-        float vertexes[] = {-0.9f, 0.9f, 0.0f, -0.8f, -0.9f, 0.2f,
-                -0.6f, 0.8f, -0.2f, -0.4f, -0.8f, 0.2f,
-                -0.3f, 0.9f, -0.2f, -0.2f, -0.9f, 0.2f,
-                0.4f, 0.7f, 0.0f, 0.4f, -0.7f, 0.3f,
-                0.6f, 0.9f, -0.3f, 0.6f, -.9f, 0.0f,
-                0.9f, 0.8f, 0.2f, 0.8f, -0.8f, 0.3f};
+//        int stripCount[] = new int[1];
+//        int stripCount[]=new int[2];
+        int stripCount[]=new int[3];
+        float vertexes[] = {.0f, 0.9f, 0.0f, -1.f, -0.8f, 0.f,
+                -0.8f, -0.6f, -0.2f, -0.6f, -0.9f, 0.2f,
+                -0.4f, -0.8f, -0.2f, 0.f, -0.8f, 0.2f,
+                0.2f, -0.5f, 0.0f, 0.4f, -0.6f, -0.5f,
+                0.6f, -0.8f, -0.3f, 0.8f, -0.9f, -0.2f,
+                0.9f, -0.7f, -0.2f, 1.1f, -0.8f, -0.3f};
         float colors[] = {0.0f, 0.5f, 1.0f, 0.0f, 0.5f, 1.0f,
                 0.0f, 0.8f, .0f, 1.0f, 0.0f, 0.3f,
                 0.0f, 1.0f, 0.5f, 0.9f, 1.0f, 0.0f,
                 0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f,
                 1.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.5f,
                 1.0f, 0.8f, 0.0f, 1.0f, 0.5f, 0.0f};
-        //生成三个子Strip，每个含有四个顶点
         stripCount[0] = 4;
         stripCount[1] = 4;
         stripCount[2] = 4;
-        TriangleStripArray triangleStriparray = new TriangleStripArray(vertexesCount,
-                TriangleStripArray.COORDINATES | TriangleStripArray.COLOR_3, stripCount);
-        triangleStriparray.setCoordinates(0, vertexes);
-        triangleStriparray.setColors(0, colors);
+        TriangleFanArray triangleFanarray = new TriangleFanArray(vertexesCount,
+                TriangleFanArray.COORDINATES | TriangleFanArray.COLOR_3, stripCount);
+        triangleFanarray.setCoordinates(0, vertexes);
+        triangleFanarray.setColors(0, colors);
         PolygonAttributes polygonattributes = new PolygonAttributes();
         polygonattributes.setCullFace(PolygonAttributes.CULL_NONE);
+
+//        polygonattributes.setPolygonMode(PolygonAttributes.POLYGON_LINE); // 设置为线模型
+
         Appearance app = new Appearance();
         app.setPolygonAttributes(polygonattributes);
-        this.setGeometry(triangleStriparray);
+        this.setGeometry(triangleFanarray);
         this.setAppearance(app);
     }
 }

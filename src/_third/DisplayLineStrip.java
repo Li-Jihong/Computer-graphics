@@ -1,9 +1,9 @@
-/**
+package _third; /**
  * \* Created with IntelliJ IDEA.
- * \* @ProjectName: 例3.4 线显示的程序
- * \* @FileName: DisplayLines
+ * \* @ProjectName: 例3.6 LineStripArray类程序实例
+ * \* @FileName: _third.DisplayLineStrip
  * \* @author: li-jihong
- * \* Date: 2023-09-28 10:41
+ * \* Date: 2023-09-28 11:39:
  */
 
 import com.sun.j3d.utils.applet.MainFrame;
@@ -19,8 +19,8 @@ import javax.vecmath.Vector3f;
 import java.applet.Applet;
 import java.awt.*;
 
-public class DisplayLines extends Applet {
-    public DisplayLines() {
+public class DisplayLineStrip extends Applet {
+    public DisplayLineStrip() {
         setLayout(new BorderLayout());
         GraphicsConfiguration gc = SimpleUniverse.getPreferredConfiguration();
         Canvas3D c = new Canvas3D(gc);
@@ -32,7 +32,7 @@ public class DisplayLines extends Applet {
     }
 
     public static void main(String[] args) {
-        new MainFrame(new DisplayLines(), 450, 450);
+        new MainFrame(new DisplayLineStrip(), 450, 450);
     }
 
     public BranchGroup createBranchGroupSceneGraph() {
@@ -63,35 +63,59 @@ public class DisplayLines extends Applet {
         mousetranslate.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mousetranslate);
         mousetranslate.setSchedulingBounds(bounds);
-        transformgroup.addChild(shapelines());//将线加入到TransformGroup中
+        transformgroup.addChild(Striplines());
         BranchGroupRoot.compile();
         return BranchGroupRoot;
     }
 
-    public Shape3D shapelines() {
-        Shape3D shapelines0 = new Shape3D();
-        //定义点坐标
-        float vertexes[] = {.8f, 0.5f, 0.0f, -0.8f, .8f, 0.0f,
-                0.8f, 0.0f, 0.0f, -0.8f, 0.5f, 0.0f,
-                0.8f, -0.5f, 0.0f, -0.8f, 0.2f, 0.0f};
-        //定义颜色
+    public Shape3D Striplines() {
+        Shape3D Striplines0 = new Shape3D();
+        float vertexes[] = {-0.8f, 0.5f, 0.0f, 0.8f, 0.9f, 0.0f,
+                -0.8f, 0.2f, 0.0f, 0.8f, 0.7f, 0.0f,
+                -0.8f, -0.2f, 0.0f, 0.8f, -0.5f, 0.0f,
+                -0.8f, -0.5f, 0.0f, 0.8f, -.8f, 0.0f,};
+
+//        // 把线段放到一个直线上
+//        float vertexes[] = {-0.8f, 0.0f, 0.0f, 0.8f, 0.0f, 0.0f,
+//                -0.8f, 0.0f, 0.0f, 0.8f, 0.0f, 0.0f,
+//                -0.8f, 0.0f, 0.0f, 0.8f, 0.0f, 0.0f,
+//                -0.8f, 0.0f, 0.0f, 0.8f, 0.0f, 0.0f};
+
         float colors[] = {1.0f, 0.f, .0f, 0.0f, 1.f, .0f,
                 0.0f, 0.f, 1.f, 1.0f, 1.0f, 0.f,
-                0.0f, 1.0f, 1.f, 1.f, 0.f, 1.0f};
-        //定义线数组
-        LineArray lines = new LineArray(6, LineArray.COORDINATES | LineArray.COLOR_3);
-        lines.setCoordinates(0, vertexes);
-        lines.setColors(0, colors);
-        //定义线属性
+                0.0f, 1.0f, 1.f, 1.f, 0.f, 1.0f,
+                0.0f, .0f, 0.f, 0.3f, 0.8f, 0.0f,};
+
+        //方案一: 分为两组，4个顶点、4个顶点
+        int[] substrips = new int[2];
+        substrips[0] = 4;
+        substrips[1] = 4;
+
+        //方案二: 分为两组，2个顶点、6个顶点
+//        int[] substrips = new int[2];
+//        substrips[0] = 2;
+//        substrips[1] = 6;
+
+        //方案三: 分为两组，6个顶点、2个顶点
+//        int[] substrips = new int[2];
+//        substrips[0] = 6;
+//        substrips[1] = 2;
+
+        //方案四: 整个是一个组
+//        int[] substrips=new int[1];
+//        substrips[0]=8;
+        LineStripArray Striplines = new LineStripArray
+                (8, LineArray.COORDINATES | LineArray.COLOR_3, substrips);
+        Striplines.setCoordinates(0, vertexes);
+        Striplines.setColors(0, colors);
         LineAttributes lineattributes = new LineAttributes();
-        lineattributes.setLineWidth(20.f);
-        lineattributes.setLineAntialiasingEnable(false);
-        lineattributes.setLinePattern(LineAttributes.PATTERN_SOLID);
-        //PATTERN_SOLID PATTERN_DASH PATTERN_DOT PATTERN_DASH_DOT
+        lineattributes.setLineWidth(9.0f);
+        lineattributes.setLineAntialiasingEnable(true);
+        lineattributes.setLinePattern(0);
         Appearance app = new Appearance();
         app.setLineAttributes(lineattributes);
-        shapelines0.setGeometry(lines);
-        shapelines0.setAppearance(app);
-        return shapelines0;
+        Striplines0.setGeometry(Striplines);
+        Striplines0.setAppearance(app);
+        return Striplines0;
     }
 }
