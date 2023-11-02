@@ -1,9 +1,16 @@
-package _first;
+package week8_fifth._3_16;
+
+/**
+ * \* Created with IntelliJ IDEA.
+ * \* @ProjectName: Computer graphics
+ * \* @FileName: TransparencyAttributess
+ * \* @author: li-jihong
+ * \* Date: 2023-11-02 13:13
+ */
 
 import com.sun.j3d.utils.applet.MainFrame;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
-import com.sun.j3d.utils.behaviors.mouse.MouseWheelZoom;
 import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import com.sun.j3d.utils.geometry.Box;
 import com.sun.j3d.utils.geometry.Sphere;
@@ -16,97 +23,92 @@ import javax.vecmath.Vector3f;
 import java.applet.Applet;
 import java.awt.*;
 
-public class twoprimitivedisplay extends Applet {
-    public twoprimitivedisplay() {//设置显示界面的相关参数
+public class TransparencyAttributess extends Applet {
+    public TransparencyAttributess() {
         setLayout(new BorderLayout());
-//创建投影平面Canvas3D
         GraphicsConfiguration gc = SimpleUniverse.getPreferredConfiguration();
         Canvas3D c = new Canvas3D(gc);
-//将投影平面上的图象显示在显示平面的中间
         add("Center", c);
-//设置SimpleUniverse，由系统选择视点在z轴的正向，观察方向沿z轴反向
-        BranchGroup BranchGroupScene = createBranchGroup();
+        BranchGroup BranchGroupScene = createBranchGroupSceneGraph();
         SimpleUniverse u = new SimpleUniverse(c);
         u.getViewingPlatform().setNominalViewingTransform();
-//将BranchGroup：BranchGroupScene加入到SimpleUniverse：u中
         u.addBranchGraph(BranchGroupScene);
     }
 
-    public static void main(String[] args) {//通过MainFrame显示图象
-        new MainFrame(new twoprimitivedisplay(), 300, 300);
+    public static void main(String[] args) {
+        new MainFrame(new TransparencyAttributess(), 300, 300);
     }
 
-    public BranchGroup createBranchGroup() {//定义BranchGroup
-        BranchGroup BranchGroupRoot = new BranchGroup();
-//创建球心在坐标系原点球形范围
+    public BranchGroup createBranchGroupSceneGraph() {
+        BranchGroup BrachGroupRoot = new BranchGroup();
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
-//定义背景颜色
         Color3f bgColor = new Color3f(1.0f, 1.0f, 1.0f);
         Background bg = new Background(bgColor);
         bg.setApplicationBounds(bounds);
-        BranchGroupRoot.addChild(bg);
-//定义平行光、颜色、照射方向与作用范围
+        BrachGroupRoot.addChild(bg);
         Color3f directionalColor = new Color3f(1.f, 1.f, 1.f);
         Vector3f vec = new Vector3f(-1.f, -1.f, -1.0f);
         DirectionalLight directionalLight = new DirectionalLight(directionalColor, vec);
         directionalLight.setInfluencingBounds(bounds);
-        BranchGroupRoot.addChild(directionalLight);
-//定义两个三维型体的外观
+        BrachGroupRoot.addChild(directionalLight);
         Appearance app1 = new Appearance();
         Material material1 = new Material();
         material1.setDiffuseColor(new Color3f(1.0f, .0f, 0.0f));
         app1.setMaterial(material1);
+//定义球体的透明度，透明模式选NICEST=1，透明度0.6f
+        TransparencyAttributes transparence = new TransparencyAttributes(1, .6f);
+        app1.setTransparencyAttributes(transparence);
         Appearance app2 = new Appearance();
         Material material2 = new Material();
         material2.setDiffuseColor(new Color3f(.0f, 1.0f, 0.0f));
         app2.setMaterial(material2);
-//定义总的TransformGroup：transformgroup
+        TransparencyAttributes transparence1 = new TransparencyAttributes(1, .8f);
+        app2.setTransparencyAttributes(transparence1);
+        Appearance app3 = new Appearance();
+        Material material3 = new Material();
+        material3.setDiffuseColor(new Color3f(.0f, .0f, 1.0f));
+        app3.setMaterial(material3);
+        app3.setTransparencyAttributes(transparence1);
+        Appearance app4 = new Appearance();
+        Material material4 = new Material();
+        material4.setDiffuseColor(new Color3f(.0f, 1.0f, 1.0f));
+        app4.setMaterial(material2);
+        app4.setTransparencyAttributes(transparence1);
         TransformGroup transformgroup = new TransformGroup();
-//设置对该TransformGroup的读写能力
         transformgroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         transformgroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-//将该TransformGroup加入到BranchGroupRoot中
-        BranchGroupRoot.addChild(transformgroup);
-
-
-        //定义鼠标对场景的旋转、平移与放大功能
-        //鼠标旋转功能
+        BrachGroupRoot.addChild(transformgroup);
         MouseRotate mouserotate = new MouseRotate();
         mouserotate.setTransformGroup(transformgroup);
-        BranchGroupRoot.addChild(mouserotate);
+        BrachGroupRoot.addChild(mouserotate);
         mouserotate.setSchedulingBounds(bounds);
-
-        //这是之前的不能进行缩放
         MouseZoom mousezoom = new MouseZoom();
         mousezoom.setTransformGroup(transformgroup);
-        BranchGroupRoot.addChild(mousezoom);
+        BrachGroupRoot.addChild(mousezoom);
         mousezoom.setSchedulingBounds(bounds);
-
-        //重新定义鼠标缩放功能默认滚轮
-        MouseWheelZoom mouseWheelZoom = new MouseWheelZoom();
-        mouseWheelZoom.setTransformGroup(transformgroup);
-        BranchGroupRoot.addChild(mouseWheelZoom);
-        mouseWheelZoom.setSchedulingBounds(bounds);
-
-        //鼠标平移功能默认鼠标右键
         MouseTranslate mousetranslate = new MouseTranslate();
         mousetranslate.setTransformGroup(transformgroup);
-        BranchGroupRoot.addChild(mousetranslate);
+        BrachGroupRoot.addChild(mousetranslate);
         mousetranslate.setSchedulingBounds(bounds);
-
-        /*定义一个球体与一个长方体的大小、外观属性与坐标变换，并定义相应的TransformGroup：tg1、tg2*/
         TransformGroup tg1 = new TransformGroup();
-        tg1.addChild(new Sphere(0.4f, app1));
+        tg1.addChild(new Sphere(.9f, 1, 100, app1));
         Transform3D t = new Transform3D();
-        t.setTranslation(new Vector3f(0.f, -0.425f, 0.f));
+        t.setTranslation(new Vector3f(-0.2f, 0.1f, 0.2f));
         TransformGroup tg2 = new TransformGroup(t);
-        tg2.addChild(new Box(0.5f, 0.05f, 0.5f, app2));
-//将定义好的两个TransformGroup(tg1、tg2)加入到总的transformgroup
+        tg2.addChild(new Box(0.2f, 0.2f, 0.2f, app2));
+        Transform3D t1 = new Transform3D();
+        t1.setTranslation(new Vector3f(-0.2f, 0.1f, 0.2f));
+        TransformGroup tg3 = new TransformGroup(t1);
+        tg3.addChild(new Sphere(.6f, 1, 100, app3));
+        Transform3D t2 = new Transform3D();
+        t2.setTranslation(new Vector3f(0.4f, 0.2f, -0.4f));
+        TransformGroup tg4 = new TransformGroup(t2);
+        tg4.addChild(new Sphere(.3f, 1, 100, app4));
         transformgroup.addChild(tg1);
         transformgroup.addChild(tg2);
-//对BranchGroupRoot预编译
-        BranchGroupRoot.compile();
-//通过方法名返回BranchGroupRoot
-        return BranchGroupRoot;
+        transformgroup.addChild(tg3);
+        transformgroup.addChild(tg4);
+        BrachGroupRoot.compile();
+        return BrachGroupRoot;
     }
 }
