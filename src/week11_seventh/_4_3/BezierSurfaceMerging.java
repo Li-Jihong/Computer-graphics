@@ -238,7 +238,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
                 BezierQuadsurfaceface.setCoordinate(c + 1, B);
                 BezierQuadsurfaceface.setCoordinate(c + 2, C);
                 BezierQuadsurfaceface.setCoordinate(c + 3, D);
-//设置点的法向量
+                //设置点的法向量
                 BezierQuadsurfaceface.setNormal(c, n);
                 BezierQuadsurfaceface.setNormal(c + 1, n);
                 BezierQuadsurfaceface.setNormal(c + 2, n);
