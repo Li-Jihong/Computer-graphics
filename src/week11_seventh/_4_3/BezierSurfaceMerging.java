@@ -160,7 +160,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
         //定义U、V矩阵数组
         float[][] UU = new float[1][4];
         float[][] VV = new float[4][1];
-//定义存放曲面上点的坐标的数组
+        //定义存放曲面上点的坐标的数组
         float[][][] SurfaceXYZ = new float[n0 + 1][n0 + 1][4];
         for (i = 0; i < n0 + 1; i++)
             for (j = 0; j < n0 + 1; j++) {
