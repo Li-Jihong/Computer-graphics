@@ -11,10 +11,9 @@ package week10_sixth._4_2;
 import com.sun.j3d.utils.applet.MainFrame;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
-<<<<<<< HEAD
+
 import com.sun.j3d.utils.behaviors.mouse.MouseWheelZoom;
-=======
->>>>>>> Computer-graphics/master
+
 import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
@@ -58,25 +57,19 @@ public class BezierThreeOrderSurface extends Applet {
         transformgroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         transformgroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         BranchGroupRoot.addChild(transformgroup);
-<<<<<<< HEAD
+
         //定义鼠标对场景的旋转、平移与放大功能
         //鼠标旋转功能
-=======
->>>>>>> Computer-graphics/master
         MouseRotate mouserotate = new MouseRotate();
         mouserotate.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mouserotate);
         mouserotate.setSchedulingBounds(bounds);
-<<<<<<< HEAD
 
         //这是之前的不能进行缩放
-=======
->>>>>>> Computer-graphics/master
         MouseZoom mousezoom = new MouseZoom();
         mousezoom.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mousezoom);
         mousezoom.setSchedulingBounds(bounds);
-<<<<<<< HEAD
 
         //重新定义鼠标缩放功能默认滚轮
         MouseWheelZoom mouseWheelZoom = new MouseWheelZoom();
@@ -85,8 +78,6 @@ public class BezierThreeOrderSurface extends Applet {
         mouseWheelZoom.setSchedulingBounds(bounds);
 
         //鼠标平移功能默认鼠标右键
-=======
->>>>>>> Computer-graphics/master
         MouseTranslate mousetranslate = new MouseTranslate();
         mousetranslate.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mousetranslate);
