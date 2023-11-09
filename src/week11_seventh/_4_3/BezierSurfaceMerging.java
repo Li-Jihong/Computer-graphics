@@ -84,7 +84,7 @@ public class BezierSurfaceMerging extends Applet {
                         {-0.2f, 0.1f, 0.9f, 1.f},
                         {0.2f, 0.f, -0.8f, 1.f},
                         {0.8f, 0.1f, 0.9f, 1.f}}};
-//定义第一个Bezier曲面外观属性
+        //定义第一个Bezier曲面外观属性
         Appearance app1 = new Appearance();
         PolygonAttributes polygona1 = new PolygonAttributes();
         polygona1.setBackFaceNormalFlip(true);
