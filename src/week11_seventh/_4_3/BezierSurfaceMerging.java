@@ -233,7 +233,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
                 Vector3f n = new Vector3f();
                 n.cross(b, a);
                 n.normalize();
-//设置点的序号
+                //设置点的序号
                 BezierQuadsurfaceface.setCoordinate(c, A);
                 BezierQuadsurfaceface.setCoordinate(c + 1, B);
                 BezierQuadsurfaceface.setCoordinate(c + 2, C);
