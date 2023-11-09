@@ -174,7 +174,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
                 PZ[i][j] = P[i][j][2];
                 P4[i][j] = P[i][j][3];
             }
-//计算曲面上点的坐标值
+        //计算曲面上点的坐标值
         for (i = 0; i < n0 + 1; i++)
             for (j = 0; j < n0 + 1; j++) {
                 UU[0][0] = 1.f;
