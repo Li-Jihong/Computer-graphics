@@ -94,7 +94,7 @@ public class BezierSurfaceMerging extends Applet {
         ColoringAttributes color1 = new ColoringAttributes();
         color1.setColor(1.f, 0.f, 0.f);
         app1.setColoringAttributes(color1);
-//定义第二个Bezier曲面的16个控制顶点
+        //定义第二个Bezier曲面的16个控制顶点
         float[][][] P2 = {{{-0.8f, 0.f, -0.8f, 1.f},
                 {-0.2f, 0.1f, 0.9f, 1.f},
                 {0.2f, 0.f, -0.8f, 1.f},
