@@ -146,7 +146,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
         float[][] PY = new float[4][4];
         float[][] PZ = new float[4][4];
         float[][] P4 = new float[4][4];
-//定义系数矩阵及其转置矩阵
+        //定义系数矩阵及其转置矩阵
         float[][] M1 = {{1.f, 0.f, 0.f, 0.f},
                 {-3.f, 3.f, 0.f, 0.f},
                 {3.f, -6.f, 3.f, 0.f},
