@@ -157,7 +157,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
                 {0.f, 0.f, 0.f, 1.f}};
         //定义Bezier曲面的u、v参数分割点坐标数组
         float[][][] UV = new float[n0 + 1][n0 + 1][2];
-//定义U、V矩阵数组
+        //定义U、V矩阵数组
         float[][] UU = new float[1][4];
         float[][] VV = new float[4][1];
 //定义存放曲面上点的坐标的数组
