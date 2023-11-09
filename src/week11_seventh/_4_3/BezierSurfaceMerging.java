@@ -67,7 +67,7 @@ public class BezierSurfaceMerging extends Applet {
         mousetranslate.setTransformGroup(transformgroup);
         BranchGroupRoot.addChild(mousetranslate);
         mousetranslate.setSchedulingBounds(bounds);
-//定义第一个Bezier曲面的16个控制顶点
+        //定义第一个Bezier曲面的16个控制顶点
         float[][][] P1 = {{{-0.8f, 0.9f, -0.4f, 1.f},
                 {-0.2f, 0.8f, -0.5f, 1.f},
                 {0.2f, 0.9f, -0.4f, 1.f},
