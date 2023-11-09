@@ -111,7 +111,7 @@ public class BezierSurfaceMerging extends Applet {
                         {-0.2f, -0.9f, 0.6f, 1.f},
                         {0.2f, -0.8f, 0.4f, 1.f},
                         {0.8f, -0.9f, 0.6f, 1.f}}};
-//定义第二个Bezier曲面外观属性
+        //定义第二个Bezier曲面外观属性
         Appearance app2 = new Appearance();
         PolygonAttributes polygona2 = new PolygonAttributes();
         polygona2.setBackFaceNormalFlip(true);
