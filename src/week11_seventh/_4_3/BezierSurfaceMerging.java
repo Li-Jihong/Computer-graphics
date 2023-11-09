@@ -227,7 +227,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
                         SurfaceXYZ[i + 1][j + 1][2]);
                 Point3f D = new Point3f(SurfaceXYZ[i + 1][j][0], SurfaceXYZ[i + 1][j][1],
                         SurfaceXYZ[i + 1][j][2]);
-//计算由四个点形成的平面的法向量
+                //计算由四个点形成的平面的法向量
                 Vector3f a = new Vector3f(A.x - B.x, A.y - B.y, A.z - B.z);
                 Vector3f b = new Vector3f(C.x - B.x, C.y - B.y, C.z - B.z);
                 Vector3f n = new Vector3f();
