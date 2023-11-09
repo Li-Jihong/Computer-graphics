@@ -141,7 +141,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
         float division;//参数u在[0，1]区间的等分线段长度
         n0 = 50;
         division = 1.f / n0;
-//分别定义存放控制顶点x、y、z坐标与第四维坐标的数组
+        //分别定义存放控制顶点x、y、z坐标与第四维坐标的数组
         float[][] PX = new float[4][4];
         float[][] PY = new float[4][4];
         float[][] PZ = new float[4][4];
