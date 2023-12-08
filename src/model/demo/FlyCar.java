@@ -600,7 +600,7 @@ class BezierThreeOrderSurfaceface extends Shape3D {
                 BezierQuadsurfaceface.setNormal(c + 1, n);
                 BezierQuadsurfaceface.setNormal(c + 2, n);
                 BezierQuadsurfaceface.setNormal(c + 3, n);
-//设置纹理坐标
+                //设置纹理坐标
                 TexCoord2f texCoords = new TexCoord2f(i * 1.f / n0, 1.f - j * 1.f / n0);
                 BezierQuadsurfaceface.setTextureCoordinate(0, c, texCoords);
                 texCoords = new TexCoord2f((i + 1) * 1.f / n0, 1.f - j * 1.f / n0);
